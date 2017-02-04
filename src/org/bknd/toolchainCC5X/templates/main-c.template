@@ -1,0 +1,17 @@
+/*
+   File:   %<%NAME%>%.%<%EXTENSION%>%
+   Author: %<%USER%>%
+
+   Created on %<%DATE%>%, %<%TIME%>%
+ */
+
+#include <cc5x.h>
+
+void main(void)
+{
+    //Infinite loop
+    for(;;)
+    {
+
+    }
+}

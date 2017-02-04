@@ -1,0 +1,520 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+
+<mp:languageToolchain xmlns:mp="http://crownking/mplab"
+                      xmlns:opt="http://crownking/opt"
+                      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                      xsi:schemaLocation="http://crownking/mplab mplab/languageToolchain.xsd"
+                      mp:id="CC5X"
+                      mp:name="CC5X Toolchain"
+                      opt:fromversion="3.5D"
+                      mp:hostplatforms="windows,none"
+                      mp:class="org.bknd.toolchainCC5X.CC5XToolchain">
+    
+    <mp:versionProvider mp:class="org.bknd.toolchainCC5X.CC5XVersionProvider"/>
+    <opt:versionFactory opt:class="org.bknd.toolchainCC5X.CC5XVersionFactory"/>
+
+    <mp:configurationObject mp:id="cc5x-mode" mp:idref="CC5X" opt:src="cc5x.mode.optionLanguage.xml"/>
+    <mp:configurationObject mp:id="cc5x-config" mp:idref="CC5X" opt:src="cc5x.config.optionLanguage.xml"/>
+    
+    <mp:customizerNode mp:idref="cc5x-mode" mp:name="CC5X Toolchain">
+        <mp:customizerNode mp:idref="cc5x-config" mp:name="CC5X Compiler"/>
+    </mp:customizerNode>
+
+    <mp:makefileWriter mp:checkos="true" mp:adddependencies="false" mp:runtimepropertiesclass="org.bknd.toolchainCC5X.CC5XMakeRuntimeProperties">
+        <mp:inputToOutputExtensionMap mp:src="c" mp:dst="o"/>
+        <mp:inputToOutputExtensionMap mp:src="C" mp:dst="o"/>
+
+        <mp:build mp:buildtype="standalone" mp:outputextension="hex" mp:debuggableextension="cof">
+            <mp:buildStep mp:if="${SINGLE_MODE}" mp:idref="compile_single_mode"/>
+            <mp:buildStep mp:if="${SINGLE_MODE}" mp:idref="link_not_used"/>
+
+            <mp:buildStep mp:ifnot="${SINGLE_MODE}" mp:idref="compile_only"/>
+            <mp:buildStep mp:ifnot="${SINGLE_MODE}" mp:idref="link_external"/>
+        </mp:build>
+        
+        <mp:makeRule mp:id="compile_single_mode" mp:prerequisites=".*\.(c|C)$" mp:runtimepropertiesclass="org.bknd.toolchainCC5X.CC5XCompilerProperties">
+            <mp:textEmitter mp:text="${MKDIR} ${CURRENT_QUOTED_IF_SPACED_OBJECT_DIR_UNIX_SLASHES} ${NEWLINE}"/>
+            <mp:textEmitter mp:text="${MKDIR} ${FINAL_TARGET_DIR} ${NEWLINE}"/>
+            <mp:textEmitter mp:text="${MP_CC} -dc -FM "/>
+            <mp:textEmitter mp:text="-p${PROCESSOR_NAME} "/>
+            <mp:optionEmitter mp:idref="cc5x-config" mp:separator=" "/>
+            <mp:textEmitter mp:text=" ${CURRENT_QUOTED_IF_SPACED_SOURCE_FILE} "/>
+            <mp:textEmitter mp:text=" -O${FINAL_TARGET_DIR}"/>
+            <mp:textEmitter mp:text=" -o${FINAL_IMAGE_NAME}"/>
+            <mp:textEmitter mp:text=" -a${CURRENT_QUOTED_IF_SPACED_OBJECT_FILE_MINUS_EXTENSION}.asm"/>
+            <mp:textEmitter mp:text=" -CF${FINAL_IMAGE_NAME_MINUS_EXTENSION}.cof"/>
+            <mp:textEmitter mp:text="${NEWLINE}"/>
+        </mp:makeRule>
+        
+        <mp:makeRule mp:id="link_not_used" mp:prerequisites="${CURRENT_OBJECT_FILES}" mp:target="${FINAL_IMAGE_NAME}"  mp:runtimepropertiesclass="org.bknd.toolchainCC5X.CC5XCompilerProperties">
+        </mp:makeRule>
+
+        <mp:makeRule mp:id="compile_only" mp:prerequisites=".*\.(c|C)$" mp:runtimepropertiesclass="org.bknd.toolchainCC5X.CC5XCompilerProperties">
+            <mp:textEmitter mp:text="${MKDIR} ${CURRENT_QUOTED_IF_SPACED_OBJECT_DIR_UNIX_SLASHES} ${NEWLINE}"/>
+            <mp:textEmitter mp:text="${MKDIR} ${FINAL_TARGET_DIR} ${NEWLINE}"/>
+            <mp:textEmitter mp:text="${MP_CC} -dc -FM "/>
+            <mp:textEmitter mp:text="-p${PROCESSOR_NAME} "/>
+            <mp:optionEmitter mp:idref="cc5x-config" mp:separator=" "/>
+            <mp:textEmitter mp:text=" ${CURRENT_QUOTED_IF_SPACED_SOURCE_FILE} "/>
+            <mp:optionEmitter mp:idref="cc5x-mode" opt:groupidref="singlemodegrp" mp:separator=" "/>
+            <!--mp:optionEmitter mp:idref="cc5x-mode" opt:groupidref="mpasmxlocationgrp" mp:prefix=" -x"/-->
+            <mp:textEmitter mp:text=" -O${CURRENT_OBJECT_DIR}"/>
+            <mp:textEmitter mp:text="${NEWLINE}"/>
+        </mp:makeRule>
+
+        <mp:makeRule mp:id="link_external" mp:prerequisites="${CURRENT_OBJECT_FILES}" mp:target="${FINAL_IMAGE_NAME}"  mp:runtimepropertiesclass="org.bknd.toolchainCC5X.CC5XCompilerProperties">
+            <mp:textEmitter mp:text="${MP_LINK}"/>
+            <mp:textEmitter mp:text=" /i"/>
+            <mp:textEmitter mp:text=" /p ${PROCESSOR_NAME}"/>
+            <mp:textEmitter mp:text=" ${CURRENT_OBJECT_FILES}"/>
+            <mp:textEmitter mp:text=" /o ${FINAL_IMAGE_NAME_MINUS_EXTENSION}.cof"/>
+            <mp:textEmitter mp:text="${NEWLINE}"/>
+        </mp:makeRule>
+    </mp:makefileWriter>
+        
+    <mp:logicalFolder mp:id="SourceFiles"/>
+    <mp:logicalFolder mp:id="HeaderFiles"/>
+    <mp:logicalFolder mp:id="ObjectFiles"/>
+    <mp:logicalFolder mp:id="LibraryFiles"/>
+    <mp:logicalFolder mp:id="LinkerScript"/>
+
+    <mp:defaultLocation mp:hostplatform="windows" mp:dir="C:/*/bknd/CC5X/"/>
+    <mp:defaultLocation mp:hostplatform="windows" mp:dir="C:/*/bknd/*/CC5X/"/>
+    
+    <mp:cCompiler mp:file="CC5X" mp:name="CC5X Compiler">
+        <mp:versionProvider mp:class="org.bknd.toolchainCC5X.CC5XVersionProvider"/>
+        <mp:builtinProvider mp:class="org.bknd.toolchainCC5X.CC5XBuiltinProvider"/>
+        <mp:systemIncludeProvider mp:class="org.bknd.toolchainCC5X.CC5XSystemIncludeProvider"/>
+        <mp:systemDefineProvider mp:class="org.bknd.toolchainCC5X.CC5XSystemDefineProvider"/>
+        <mp:userIncludeProvider mp:class="org.bknd.toolchainCC5X.CC5XUserIncludeProvider"/>
+        <mp:userIncludeModifier mp:class="org.bknd.toolchainCC5X.CC5XUserIncludeModifier"/>
+        <mp:userDefineProvider mp:class="org.bknd.toolchainCC5X.CC5XUserDefineProvider"/>
+        <mp:userDefineModifier mp:class="org.bknd.toolchainCC5X.CC5XUserDefineModifier"/>
+    </mp:cCompiler>
+
+    <mp:deviceSupport>
+        <mp:family mp:family="16x">
+            <mp:device mp:name="PIC14000"/>
+            <mp:device mp:name="PIC10F200"/>
+            <mp:device mp:name="PIC10F202"/>
+            <mp:device mp:name="PIC10F204"/>
+            <mp:device mp:name="PIC10F206"/>
+            <mp:device mp:name="PIC10F220"/>
+            <mp:device mp:name="PIC10F222"/>
+            <mp:device mp:name="PIC10F320"/>
+            <mp:device mp:name="PIC10F322"/>
+            <mp:device mp:name="PIC12C508"/>
+            <mp:device mp:name="PIC12C508A"/>
+            <mp:device mp:name="PIC12C509"/>
+            <mp:device mp:name="PIC12C509A"/>
+            <mp:device mp:name="PIC12C671"/>
+            <mp:device mp:name="PIC12C672"/>
+            <mp:device mp:name="PIC12CE518"/>
+            <mp:device mp:name="PIC12CE519"/>
+            <mp:device mp:name="PIC12CE673"/>
+            <mp:device mp:name="PIC12CE674"/>
+            <mp:device mp:name="PIC12F1501"/>
+            <mp:device mp:name="PIC12F1552"/>
+            <mp:device mp:name="PIC12F1571"/>
+            <mp:device mp:name="PIC12F1572"/>
+            <mp:device mp:name="PIC12F1612"/>
+            <mp:device mp:name="PIC12F1822"/>
+            <mp:device mp:name="PIC12F1840"/>
+            <mp:device mp:name="PIC12F508"/>
+            <mp:device mp:name="PIC12F509"/>
+            <mp:device mp:name="PIC12F510"/>
+            <mp:device mp:name="PIC12F519"/>
+            <mp:device mp:name="PIC12F609"/>
+            <mp:device mp:name="PIC12F615"/>
+            <mp:device mp:name="PIC12F617"/>
+            <mp:device mp:name="PIC12F629"/>
+            <mp:device mp:name="PIC12F635"/>
+            <mp:device mp:name="PIC12F675"/>
+            <mp:device mp:name="PIC12F683"/>
+            <mp:device mp:name="PIC12F752"/>
+            <mp:device mp:name="PIC12HV609"/>
+            <mp:device mp:name="PIC12HV615"/>
+            <mp:device mp:name="PIC12HV752"/>
+            <mp:device mp:name="PIC16C432"/>
+            <mp:device mp:name="PIC16C433"/>
+            <mp:device mp:name="PIC16C505"/>
+            <mp:device mp:name="PIC16C52"/>
+            <mp:device mp:name="PIC16C54"/>
+            <mp:device mp:name="PIC16C54A"/>
+            <mp:device mp:name="PIC16C54B"/>
+            <mp:device mp:name="PIC16C54C"/>
+            <mp:device mp:name="PIC16C55"/>
+            <mp:device mp:name="PIC16C554"/>
+            <mp:device mp:name="PIC16C556"/>
+            <mp:device mp:name="PIC16C558"/>
+            <mp:device mp:name="PIC16C55A"/>
+            <mp:device mp:name="PIC16C56"/>
+            <mp:device mp:name="PIC16C56A"/>
+            <mp:device mp:name="PIC16C57"/>
+            <mp:device mp:name="PIC16C57C"/>
+            <mp:device mp:name="PIC16C58"/>
+            <mp:device mp:name="PIC16C58A"/>
+            <mp:device mp:name="PIC16C58B"/>
+            <mp:device mp:name="PIC16C61"/>
+            <mp:device mp:name="PIC16C62"/>
+            <mp:device mp:name="PIC16C620"/>
+            <mp:device mp:name="PIC16C620A"/>
+            <mp:device mp:name="PIC16C621"/>
+            <mp:device mp:name="PIC16C621A"/>
+            <mp:device mp:name="PIC16C622"/>
+            <mp:device mp:name="PIC16C622A"/>
+            <mp:device mp:name="PIC16C62A"/>
+            <mp:device mp:name="PIC16C62B"/>
+            <mp:device mp:name="PIC16C63"/>
+            <mp:device mp:name="PIC16C63A"/>
+            <mp:device mp:name="PIC16C64"/>
+            <mp:device mp:name="PIC16C641"/>
+            <mp:device mp:name="PIC16C642"/>
+            <mp:device mp:name="PIC16C64A"/>
+            <mp:device mp:name="PIC16C65"/>
+            <mp:device mp:name="PIC16C65A"/>
+            <mp:device mp:name="PIC16C65B"/>
+            <mp:device mp:name="PIC16C66"/>
+            <mp:device mp:name="PIC16C661"/>
+            <mp:device mp:name="PIC16C662"/>
+            <mp:device mp:name="PIC16C67"/>
+            <mp:device mp:name="PIC16C71"/>
+            <mp:device mp:name="PIC16C710"/>
+            <mp:device mp:name="PIC16C711"/>
+            <mp:device mp:name="PIC16C712"/>
+            <mp:device mp:name="PIC16C715"/>
+            <mp:device mp:name="PIC16C716"/>
+            <mp:device mp:name="PIC16C717"/>
+            <mp:device mp:name="PIC16C72"/>
+            <mp:device mp:name="PIC16C72A"/>
+            <mp:device mp:name="PIC16C73"/>
+            <mp:device mp:name="PIC16C73A"/>
+            <mp:device mp:name="PIC16C73B"/>
+            <mp:device mp:name="PIC16C74"/>
+            <mp:device mp:name="PIC16C745"/>
+            <mp:device mp:name="PIC16C74A"/>
+            <mp:device mp:name="PIC16C74B"/>
+            <mp:device mp:name="PIC16C76"/>
+            <mp:device mp:name="PIC16C765"/>
+            <mp:device mp:name="PIC16C77"/>
+            <mp:device mp:name="PIC16C770"/>
+            <mp:device mp:name="PIC16C771"/>
+            <mp:device mp:name="PIC16C773"/>
+            <mp:device mp:name="PIC16C774"/>
+            <mp:device mp:name="PIC16C781"/>
+            <mp:device mp:name="PIC16C782"/>
+            <mp:device mp:name="PIC16C83"/>
+            <mp:device mp:name="PIC16C84"/>
+            <mp:device mp:name="PIC16C923"/>
+            <mp:device mp:name="PIC16C924"/>
+            <mp:device mp:name="PIC16C925"/>
+            <mp:device mp:name="PIC16C926"/>
+            <mp:device mp:name="PIC16CE623"/>
+            <mp:device mp:name="PIC16CE624"/>
+            <mp:device mp:name="PIC16CE625"/>
+            <mp:device mp:name="PIC16CR54A"/>
+            <mp:device mp:name="PIC16CR54B"/>
+            <mp:device mp:name="PIC16CR54C"/>
+            <mp:device mp:name="PIC16CR56A"/>
+            <mp:device mp:name="PIC16CR57B"/>
+            <mp:device mp:name="PIC16CR57C"/>
+            <mp:device mp:name="PIC16CR58A"/>
+            <mp:device mp:name="PIC16CR58B"/>
+            <mp:device mp:name="PIC16CR62"/>
+            <mp:device mp:name="PIC16CR620A"/>
+            <mp:device mp:name="PIC16CR63"/>
+            <mp:device mp:name="PIC16CR64"/>
+            <mp:device mp:name="PIC16CR65"/>
+            <mp:device mp:name="PIC16CR72"/>
+            <mp:device mp:name="PIC16CR83"/>
+            <mp:device mp:name="PIC16CR84"/>
+            <mp:device mp:name="PIC16F1454"/>
+            <mp:device mp:name="PIC16F1455"/>
+            <mp:device mp:name="PIC16F1459"/>
+            <mp:device mp:name="PIC16F1503"/>
+            <mp:device mp:name="PIC16F1507"/>
+            <mp:device mp:name="PIC16F1508"/>
+            <mp:device mp:name="PIC16F1509"/>
+            <mp:device mp:name="PIC16F1512"/>
+            <mp:device mp:name="PIC16F1513"/>
+            <mp:device mp:name="PIC16F1516"/>
+            <mp:device mp:name="PIC16F1517"/>
+            <mp:device mp:name="PIC16F1518"/>
+            <mp:device mp:name="PIC16F1519"/>
+            <mp:device mp:name="PIC16F1526"/>
+            <mp:device mp:name="PIC16F1527"/>
+            <mp:device mp:name="PIC16F15354" opt:fromversion="3.5G"/>
+            <mp:device mp:name="PIC16F15355" opt:fromversion="3.5G"/>
+            <mp:device mp:name="PIC16F1554"/>
+            <mp:device mp:name="PIC16F1559"/>
+            <mp:device mp:name="PIC16F1566" opt:fromversion="3.5G"/>
+            <mp:device mp:name="PIC16F1567" opt:fromversion="3.5G"/>
+            <mp:device mp:name="PIC16F1574"/>
+            <mp:device mp:name="PIC16F1575"/>
+            <mp:device mp:name="PIC16F1578"/>
+            <mp:device mp:name="PIC16F1579"/>
+            <mp:device mp:name="PIC16F1613"/>
+            <mp:device mp:name="PIC16F1614"/>
+            <mp:device mp:name="PIC16F1615"/>
+            <mp:device mp:name="PIC16F1618"/>
+            <mp:device mp:name="PIC16F1619"/>
+            <mp:device mp:name="PIC16F1703"/>
+            <mp:device mp:name="PIC16F1704"/>
+            <mp:device mp:name="PIC16F1705"/>
+            <mp:device mp:name="PIC16F1707"/>
+            <mp:device mp:name="PIC16F1708"/>
+            <mp:device mp:name="PIC16F1709"/>
+            <mp:device mp:name="PIC16F1713"/>
+            <mp:device mp:name="PIC16F1716"/>
+            <mp:device mp:name="PIC16F1717"/>
+            <mp:device mp:name="PIC16F1718"/>
+            <mp:device mp:name="PIC16F1719"/>
+            <mp:device mp:name="PIC16F1764"/>
+            <mp:device mp:name="PIC16F1765"/>
+            <mp:device mp:name="PIC16F1768"/>
+            <mp:device mp:name="PIC16F1769"/>
+            <mp:device mp:name="PIC16F1773" opt:fromversion="3.5G"/>
+            <mp:device mp:name="PIC16F1776" opt:fromversion="3.5G"/>
+            <mp:device mp:name="PIC16F1777" opt:fromversion="3.5G"/>
+            <mp:device mp:name="PIC16F1778" opt:fromversion="3.5G"/>
+            <mp:device mp:name="PIC16F1779" opt:fromversion="3.5G"/>
+            <mp:device mp:name="PIC16F1782"/>
+            <mp:device mp:name="PIC16F1783"/>
+            <mp:device mp:name="PIC16F1784"/>
+            <mp:device mp:name="PIC16F1786"/>
+            <mp:device mp:name="PIC16F1787"/>
+            <mp:device mp:name="PIC16F1788"/>
+            <mp:device mp:name="PIC16F1789"/>
+            <mp:device mp:name="PIC16F1823"/>
+            <mp:device mp:name="PIC16F1824"/>
+            <mp:device mp:name="PIC16F1825"/>
+            <mp:device mp:name="PIC16F1826"/>
+            <mp:device mp:name="PIC16F1827"/>
+            <mp:device mp:name="PIC16F1828"/>
+            <mp:device mp:name="PIC16F1829"/>
+            <mp:device mp:name="PIC16F18313" opt:fromversion="3.5G"/>
+            <mp:device mp:name="PIC16F18323" opt:fromversion="3.5G"/>
+            <mp:device mp:name="PIC16F18324" opt:fromversion="3.5G"/>
+            <mp:device mp:name="PIC16F18325" opt:fromversion="3.5G"/>
+            <mp:device mp:name="PIC16F18326" opt:fromversion="3.5G"/>
+            <mp:device mp:name="PIC16F18344" opt:fromversion="3.5G"/>
+            <mp:device mp:name="PIC16F18345" opt:fromversion="3.5G"/>
+            <mp:device mp:name="PIC16F18346" opt:fromversion="3.5G"/>
+            <mp:device mp:name="PIC16F1847"/>
+            <mp:device mp:name="PIC16F18854" opt:fromversion="3.5G"/>
+            <mp:device mp:name="PIC16F18855" opt:fromversion="3.5G"/>
+            <mp:device mp:name="PIC16F18857" opt:fromversion="3.5G"/>
+            <mp:device mp:name="PIC16F18875" opt:fromversion="3.5G"/>
+            <mp:device mp:name="PIC16F18877" opt:fromversion="3.5G"/>
+            <mp:device mp:name="PIC16F1902"/>
+            <mp:device mp:name="PIC16F1903"/>
+            <mp:device mp:name="PIC16F1904"/>
+            <mp:device mp:name="PIC16F1906"/>
+            <mp:device mp:name="PIC16F1907"/>
+            <mp:device mp:name="PIC16F1933"/>
+            <mp:device mp:name="PIC16F1934"/>
+            <mp:device mp:name="PIC16F1936"/>
+            <mp:device mp:name="PIC16F1937"/>
+            <mp:device mp:name="PIC16F1938"/>
+            <mp:device mp:name="PIC16F1939"/>
+            <mp:device mp:name="PIC16F1946"/>
+            <mp:device mp:name="PIC16F1947"/>
+            <mp:device mp:name="PIC16F505"/>
+            <mp:device mp:name="PIC16F506"/>
+            <mp:device mp:name="PIC16F526"/>
+            <mp:device mp:name="PIC16F527"/>
+            <mp:device mp:name="PIC16F54"/>
+            <mp:device mp:name="PIC16F57"/>
+            <mp:device mp:name="PIC16F570"/>
+            <mp:device mp:name="PIC16F59"/>
+            <mp:device mp:name="PIC16F610"/>
+            <mp:device mp:name="PIC16F616"/>
+            <mp:device mp:name="PIC16F627"/>
+            <mp:device mp:name="PIC16F627A"/>
+            <mp:device mp:name="PIC16F628"/>
+            <mp:device mp:name="PIC16F628A"/>
+            <mp:device mp:name="PIC16F630"/>
+            <mp:device mp:name="PIC16F631"/>
+            <mp:device mp:name="PIC16F636"/>
+            <mp:device mp:name="PIC16F639"/>
+            <mp:device mp:name="PIC16F648A"/>
+            <mp:device mp:name="PIC16F676"/>
+            <mp:device mp:name="PIC16F677"/>
+            <mp:device mp:name="PIC16F684"/>
+            <mp:device mp:name="PIC16F685"/>
+            <mp:device mp:name="PIC16F687"/>
+            <mp:device mp:name="PIC16F688"/>
+            <mp:device mp:name="PIC16F689"/>
+            <mp:device mp:name="PIC16F690"/>
+            <mp:device mp:name="PIC16F707"/>
+            <mp:device mp:name="PIC16F716"/>
+            <mp:device mp:name="PIC16F72"/>
+            <mp:device mp:name="PIC16F720"/>
+            <mp:device mp:name="PIC16F721"/>
+            <mp:device mp:name="PIC16F722"/>
+            <mp:device mp:name="PIC16F722A"/>
+            <mp:device mp:name="PIC16F723"/>
+            <mp:device mp:name="PIC16F723A"/>
+            <mp:device mp:name="PIC16F724"/>
+            <mp:device mp:name="PIC16F726"/>
+            <mp:device mp:name="PIC16F727"/>
+            <mp:device mp:name="PIC16F73"/>
+            <mp:device mp:name="PIC16F737"/>
+            <mp:device mp:name="PIC16F74"/>
+            <mp:device mp:name="PIC16F747"/>
+            <mp:device mp:name="PIC16F753"/>
+            <mp:device mp:name="PIC16F76"/>
+            <mp:device mp:name="PIC16F767"/>
+            <mp:device mp:name="PIC16F77"/>
+            <mp:device mp:name="PIC16F777"/>
+            <mp:device mp:name="PIC16F785"/>
+            <mp:device mp:name="PIC16F818"/>
+            <mp:device mp:name="PIC16F819"/>
+            <mp:device mp:name="PIC16F83"/>
+            <mp:device mp:name="PIC16F84"/>
+            <mp:device mp:name="PIC16F84A"/>
+            <mp:device mp:name="PIC16F87"/>
+            <mp:device mp:name="PIC16F870"/>
+            <mp:device mp:name="PIC16F871"/>
+            <mp:device mp:name="PIC16F872"/>
+            <mp:device mp:name="PIC16F873"/>
+            <mp:device mp:name="PIC16F873A"/>
+            <mp:device mp:name="PIC16F874"/>
+            <mp:device mp:name="PIC16F874A"/>
+            <mp:device mp:name="PIC16F876"/>
+            <mp:device mp:name="PIC16F876A"/>
+            <mp:device mp:name="PIC16F877"/>
+            <mp:device mp:name="PIC16F877A"/>
+            <mp:device mp:name="PIC16F88"/>
+            <mp:device mp:name="PIC16F882"/>
+            <mp:device mp:name="PIC16F883"/>
+            <mp:device mp:name="PIC16F884"/>
+            <mp:device mp:name="PIC16F886"/>
+            <mp:device mp:name="PIC16F887"/>
+            <mp:device mp:name="PIC16F913"/>
+            <mp:device mp:name="PIC16F914"/>
+            <mp:device mp:name="PIC16F916"/>
+            <mp:device mp:name="PIC16F917"/>
+            <mp:device mp:name="PIC16F946"/>
+            <mp:device mp:name="PIC16HV540"/>
+            <mp:device mp:name="PIC16HV610"/>
+            <mp:device mp:name="PIC16HV616"/>
+            <mp:device mp:name="PIC16HV753"/>
+            <mp:device mp:name="PIC16HV785"/>
+            <mp:device mp:name="PIC12LF1501"/>
+            <mp:device mp:name="PIC12LF1552"/>
+            <mp:device mp:name="PIC12LF1571"/>
+            <mp:device mp:name="PIC12LF1572"/>
+            <mp:device mp:name="PIC12LF1612"/>
+            <mp:device mp:name="PIC12LF1822"/>
+            <mp:device mp:name="PIC12LF1840"/>
+            <mp:device mp:name="PIC16LF1454"/>
+            <mp:device mp:name="PIC16LF1455"/>
+            <mp:device mp:name="PIC16LF1459"/>
+            <mp:device mp:name="PIC16LF1503"/>
+            <mp:device mp:name="PIC16LF1507"/>
+            <mp:device mp:name="PIC16LF1508"/>
+            <mp:device mp:name="PIC16LF1509"/>
+            <mp:device mp:name="PIC16LF1512"/>
+            <mp:device mp:name="PIC16LF1513"/>
+            <mp:device mp:name="PIC16LF1516"/>
+            <mp:device mp:name="PIC16LF1517"/>
+            <mp:device mp:name="PIC16LF1518"/>
+            <mp:device mp:name="PIC16LF1519"/>
+            <mp:device mp:name="PIC16LF1526"/>
+            <mp:device mp:name="PIC16LF1527"/>
+            <mp:device mp:name="PIC16LF15354" opt:fromversion="3.5G"/>
+            <mp:device mp:name="PIC16LF15355" opt:fromversion="3.5G"/>
+            <mp:device mp:name="PIC16LF1554"/>
+            <mp:device mp:name="PIC16LF1559"/>
+            <mp:device mp:name="PIC16LF1566" opt:fromversion="3.5G"/>
+            <mp:device mp:name="PIC16LF1567" opt:fromversion="3.5G"/>
+            <mp:device mp:name="PIC16LF1574"/>
+            <mp:device mp:name="PIC16LF1575"/>
+            <mp:device mp:name="PIC16LF1578"/>
+            <mp:device mp:name="PIC16LF1579"/>
+            <mp:device mp:name="PIC16LF1613"/>
+            <mp:device mp:name="PIC16LF1614"/>
+            <mp:device mp:name="PIC16LF1615"/>
+            <mp:device mp:name="PIC16LF1618"/>
+            <mp:device mp:name="PIC16LF1619"/>
+            <mp:device mp:name="PIC16LF1703"/>
+            <mp:device mp:name="PIC16LF1704"/>
+            <mp:device mp:name="PIC16LF1705"/>
+            <mp:device mp:name="PIC16LF1707"/>
+            <mp:device mp:name="PIC16LF1708"/>
+            <mp:device mp:name="PIC16LF1709"/>
+            <mp:device mp:name="PIC16LF1713"/>
+            <mp:device mp:name="PIC16LF1716"/>
+            <mp:device mp:name="PIC16LF1717"/>
+            <mp:device mp:name="PIC16LF1718"/>
+            <mp:device mp:name="PIC16LF1719"/>
+            <mp:device mp:name="PIC16LF1764"/>
+            <mp:device mp:name="PIC16LF1765"/>
+            <mp:device mp:name="PIC16LF1768"/>
+            <mp:device mp:name="PIC16LF1769"/>
+            <mp:device mp:name="PIC16LF1773" opt:fromversion="3.5G"/>
+            <mp:device mp:name="PIC16LF1776" opt:fromversion="3.5G"/>
+            <mp:device mp:name="PIC16LF1777" opt:fromversion="3.5G"/>
+            <mp:device mp:name="PIC16LF1778" opt:fromversion="3.5G"/>
+            <mp:device mp:name="PIC16LF1779" opt:fromversion="3.5G"/>
+            <mp:device mp:name="PIC16LF1782"/>
+            <mp:device mp:name="PIC16LF1783"/>
+            <mp:device mp:name="PIC16LF1784"/>
+            <mp:device mp:name="PIC16LF1786"/>
+            <mp:device mp:name="PIC16LF1787"/>
+            <mp:device mp:name="PIC16LF1788"/>
+            <mp:device mp:name="PIC16LF1789"/>
+            <mp:device mp:name="PIC16LF1823"/>
+            <mp:device mp:name="PIC16LF1824"/>
+            <mp:device mp:name="PIC16LF1825"/>
+            <mp:device mp:name="PIC16LF1826"/>
+            <mp:device mp:name="PIC16LF1827"/>
+            <mp:device mp:name="PIC16LF1828"/>
+            <mp:device mp:name="PIC16LF1829"/>
+            <mp:device mp:name="PIC16LF18313" opt:fromversion="3.5G"/>
+            <mp:device mp:name="PIC16LF18323" opt:fromversion="3.5G"/>
+            <mp:device mp:name="PIC16LF18324" opt:fromversion="3.5G"/>
+            <mp:device mp:name="PIC16LF18325" opt:fromversion="3.5G"/>
+            <mp:device mp:name="PIC16LF18326" opt:fromversion="3.5G"/>
+            <mp:device mp:name="PIC16LF18344" opt:fromversion="3.5G"/>
+            <mp:device mp:name="PIC16LF18345" opt:fromversion="3.5G"/>
+            <mp:device mp:name="PIC16LF18346" opt:fromversion="3.5G"/>
+            <mp:device mp:name="PIC16LF1847"/>
+            <mp:device mp:name="PIC16LF18854" opt:fromversion="3.5G"/>
+            <mp:device mp:name="PIC16LF18855" opt:fromversion="3.5G"/>
+            <mp:device mp:name="PIC16LF18857" opt:fromversion="3.5G"/>
+            <mp:device mp:name="PIC16LF18875" opt:fromversion="3.5G"/>
+            <mp:device mp:name="PIC16LF18877" opt:fromversion="3.5G"/>
+            <mp:device mp:name="PIC16LF1902"/>
+            <mp:device mp:name="PIC16LF1903"/>
+            <mp:device mp:name="PIC16LF1904"/>
+            <mp:device mp:name="PIC16LF1906"/>
+            <mp:device mp:name="PIC16LF1907"/>
+            <mp:device mp:name="PIC16LF1933"/>
+            <mp:device mp:name="PIC16LF1934"/>
+            <mp:device mp:name="PIC16LF1936"/>
+            <mp:device mp:name="PIC16LF1937"/>
+            <mp:device mp:name="PIC16LF1938"/>
+            <mp:device mp:name="PIC16LF1939"/>
+            <mp:device mp:name="PIC16LF1946"/>
+            <mp:device mp:name="PIC16LF1947"/>
+            <mp:device mp:name="PIC16LF707"/>
+            <mp:device mp:name="PIC16LF720"/>
+            <mp:device mp:name="PIC16LF721"/>
+            <mp:device mp:name="PIC16LF722"/>
+            <mp:device mp:name="PIC16LF722A"/>
+            <mp:device mp:name="PIC16LF723"/>
+            <mp:device mp:name="PIC16LF723A"/>
+            <mp:device mp:name="PIC16LF724"/>
+            <mp:device mp:name="PIC16LF726"/>
+            <mp:device mp:name="PIC16LF727"/>
+        </mp:family>
+    </mp:deviceSupport>
+</mp:languageToolchain>
