@@ -11,13 +11,13 @@ and open the template in the editor.
                       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                       xsi:schemaLocation="http://crownking/mplab mplab/languageToolchain.xsd"
                       mp:id="CC5X"
-                      mp:name="CC5X Toolchain"
+                      mp:name="CC5X Compiler"
                       opt:fromversion="3.5D"
                       mp:hostplatforms="windows,none"
-                      mp:class="org.bknd.toolchainCC5X.CC5XToolchain">
+                      mp:class="com.github.mc6pac.toolchainCC5X.CC5XToolchain">
     
-    <mp:versionProvider mp:class="org.bknd.toolchainCC5X.CC5XVersionProvider"/>
-    <opt:versionFactory opt:class="org.bknd.toolchainCC5X.CC5XVersionFactory"/>
+    <mp:versionProvider mp:class="com.github.mc6pac.toolchainCC5X.CC5XVersionProvider"/>
+    <opt:versionFactory opt:class="com.github.mc6pac.toolchainCC5X.CC5XVersionFactory"/>
 
     <mp:configurationObject mp:id="cc5x-mode" mp:idref="CC5X" opt:src="cc5x.mode.optionLanguage.xml"/>
     <mp:configurationObject mp:id="cc5x-config" mp:idref="CC5X" opt:src="cc5x.config.optionLanguage.xml"/>
@@ -26,7 +26,7 @@ and open the template in the editor.
         <mp:customizerNode mp:idref="cc5x-config" mp:name="CC5X Compiler"/>
     </mp:customizerNode>
 
-    <mp:makefileWriter mp:checkos="true" mp:adddependencies="false" mp:runtimepropertiesclass="org.bknd.toolchainCC5X.CC5XMakeRuntimeProperties">
+    <mp:makefileWriter mp:checkos="true" mp:adddependencies="false" mp:runtimepropertiesclass="com.github.mc6pac.toolchainCC5X.CC5XMakeRuntimeProperties">
         <mp:inputToOutputExtensionMap mp:src="c" mp:dst="o"/>
         <mp:inputToOutputExtensionMap mp:src="C" mp:dst="o"/>
 
@@ -38,7 +38,7 @@ and open the template in the editor.
             <mp:buildStep mp:ifnot="${SINGLE_MODE}" mp:idref="link_external"/>
         </mp:build>
         
-        <mp:makeRule mp:id="compile_single_mode" mp:prerequisites=".*\.(c|C)$" mp:runtimepropertiesclass="org.bknd.toolchainCC5X.CC5XCompilerProperties">
+        <mp:makeRule mp:id="compile_single_mode" mp:prerequisites=".*\.(c|C)$" mp:runtimepropertiesclass="com.github.mc6pac.toolchainCC5X.CC5XCompilerProperties">
             <mp:textEmitter mp:text="${MKDIR} ${CURRENT_QUOTED_IF_SPACED_OBJECT_DIR_UNIX_SLASHES} ${NEWLINE}"/>
             <mp:textEmitter mp:text="${MKDIR} ${FINAL_TARGET_DIR} ${NEWLINE}"/>
             <mp:textEmitter mp:text="${MP_CC} -dc -FM "/>
@@ -52,10 +52,10 @@ and open the template in the editor.
             <mp:textEmitter mp:text="${NEWLINE}"/>
         </mp:makeRule>
         
-        <mp:makeRule mp:id="link_not_used" mp:prerequisites="${CURRENT_OBJECT_FILES}" mp:target="${FINAL_IMAGE_NAME}"  mp:runtimepropertiesclass="org.bknd.toolchainCC5X.CC5XCompilerProperties">
+        <mp:makeRule mp:id="link_not_used" mp:prerequisites="${CURRENT_OBJECT_FILES}" mp:target="${FINAL_IMAGE_NAME}"  mp:runtimepropertiesclass="com.github.mc6pac.toolchainCC5X.CC5XCompilerProperties">
         </mp:makeRule>
 
-        <mp:makeRule mp:id="compile_only" mp:prerequisites=".*\.(c|C)$" mp:runtimepropertiesclass="org.bknd.toolchainCC5X.CC5XCompilerProperties">
+        <mp:makeRule mp:id="compile_only" mp:prerequisites=".*\.(c|C)$" mp:runtimepropertiesclass="com.github.mc6pac.toolchainCC5X.CC5XCompilerProperties">
             <mp:textEmitter mp:text="${MKDIR} ${CURRENT_QUOTED_IF_SPACED_OBJECT_DIR_UNIX_SLASHES} ${NEWLINE}"/>
             <mp:textEmitter mp:text="${MKDIR} ${FINAL_TARGET_DIR} ${NEWLINE}"/>
             <mp:textEmitter mp:text="${MP_CC} -dc -FM "/>
@@ -68,7 +68,7 @@ and open the template in the editor.
             <mp:textEmitter mp:text="${NEWLINE}"/>
         </mp:makeRule>
 
-        <mp:makeRule mp:id="link_external" mp:prerequisites="${CURRENT_OBJECT_FILES}" mp:target="${FINAL_IMAGE_NAME}"  mp:runtimepropertiesclass="org.bknd.toolchainCC5X.CC5XCompilerProperties">
+        <mp:makeRule mp:id="link_external" mp:prerequisites="${CURRENT_OBJECT_FILES}" mp:target="${FINAL_IMAGE_NAME}"  mp:runtimepropertiesclass="com.github.mc6pac.toolchainCC5X.CC5XCompilerProperties">
             <mp:textEmitter mp:text="${MP_LINK}"/>
             <mp:textEmitter mp:text=" /i"/>
             <mp:textEmitter mp:text=" /p ${PROCESSOR_NAME}"/>
@@ -88,14 +88,14 @@ and open the template in the editor.
     <mp:defaultLocation mp:hostplatform="windows" mp:dir="C:/*/bknd/*/CC5X/"/>
     
     <mp:cCompiler mp:file="CC5X" mp:name="CC5X Compiler">
-        <mp:versionProvider mp:class="org.bknd.toolchainCC5X.CC5XVersionProvider"/>
-        <mp:builtinProvider mp:class="org.bknd.toolchainCC5X.CC5XBuiltinProvider"/>
-        <mp:systemIncludeProvider mp:class="org.bknd.toolchainCC5X.CC5XSystemIncludeProvider"/>
-        <mp:systemDefineProvider mp:class="org.bknd.toolchainCC5X.CC5XSystemDefineProvider"/>
-        <mp:userIncludeProvider mp:class="org.bknd.toolchainCC5X.CC5XUserIncludeProvider"/>
-        <mp:userIncludeModifier mp:class="org.bknd.toolchainCC5X.CC5XUserIncludeModifier"/>
-        <mp:userDefineProvider mp:class="org.bknd.toolchainCC5X.CC5XUserDefineProvider"/>
-        <mp:userDefineModifier mp:class="org.bknd.toolchainCC5X.CC5XUserDefineModifier"/>
+        <mp:versionProvider mp:class="com.github.mc6pac.toolchainCC5X.CC5XVersionProvider"/>
+        <mp:builtinProvider mp:class="com.github.mc6pac.toolchainCC5X.CC5XBuiltinProvider"/>
+        <mp:systemIncludeProvider mp:class="com.github.mc6pac.toolchainCC5X.CC5XSystemIncludeProvider"/>
+        <mp:systemDefineProvider mp:class="com.github.mc6pac.toolchainCC5X.CC5XSystemDefineProvider"/>
+        <mp:userIncludeProvider mp:class="com.github.mc6pac.toolchainCC5X.CC5XUserIncludeProvider"/>
+        <mp:userIncludeModifier mp:class="com.github.mc6pac.toolchainCC5X.CC5XUserIncludeModifier"/>
+        <mp:userDefineProvider mp:class="com.github.mc6pac.toolchainCC5X.CC5XUserDefineProvider"/>
+        <mp:userDefineModifier mp:class="com.github.mc6pac.toolchainCC5X.CC5XUserDefineModifier"/>
     </mp:cCompiler>
 
     <mp:deviceSupport>

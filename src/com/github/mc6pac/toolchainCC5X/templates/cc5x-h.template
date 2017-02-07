@@ -184,8 +184,8 @@
             #include <12C671.H>
     #elif defined(_12C672)
             #include <12C672.H>
-    #elif defined(_12CE518)
-            #include <12CE518.H>
+    #elif defined(_12CE518)XXX            
+			#include <12CE518.H>
     #elif defined(_12CE519)
             #include <12CE519.H>
     #elif defined(_12CE673)
@@ -984,5 +984,7 @@
             #include <16HV753.H>
     #elif defined(_16HV785)
             #include <16HV785.H>
+	#else
+		#error Headder file for device not found
     #endif
 #endif

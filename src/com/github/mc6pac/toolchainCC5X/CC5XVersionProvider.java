@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.bknd.toolchainCC5X;
+package com.github.mc6pac.toolchainCC5X;
 
 import com.microchip.mplab.nbide.embedded.api.LanguageToolSupport;
 import com.microchip.mplab.nbide.embedded.spi.VersionProvider;
