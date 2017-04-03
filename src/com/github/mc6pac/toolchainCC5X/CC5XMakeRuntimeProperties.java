@@ -19,7 +19,7 @@ public class CC5XMakeRuntimeProperties {
         commandLineProperties.put("MP_LINK", getMPLinkerLocation(projectDescriptor, conf));
     }
 
-    public boolean getCompilerMode(MakeConfigurationBook projectDescriptor, MakeConfiguration conf) {
+    private boolean getCompilerMode(MakeConfigurationBook projectDescriptor, MakeConfiguration conf) {
         boolean res = true;
         if (!Utilities.isWindows())
             return res;
@@ -40,7 +40,7 @@ public class CC5XMakeRuntimeProperties {
     }
     
     
-    public String getMPLinkerLocation(MakeConfigurationBook projectDescriptor, MakeConfiguration conf) {
+    private String getMPLinkerLocation(MakeConfigurationBook projectDescriptor, MakeConfiguration conf) {
         String res = "";
         if (!Utilities.isWindows())
             return res;
@@ -51,7 +51,7 @@ public class CC5XMakeRuntimeProperties {
             if (emissionPairs != null) {
                 for (Pair<String, String> p : emissionPairs) {
                     if (p.first.equals("mplinklocation")) {
-                        res = p.second.toString();
+                        res = p.second;
                         break;
                     }
                 }
@@ -59,5 +59,4 @@ public class CC5XMakeRuntimeProperties {
         }
         return res;
     }
-
 }

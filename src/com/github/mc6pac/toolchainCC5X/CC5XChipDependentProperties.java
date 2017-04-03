@@ -46,5 +46,4 @@ public class CC5XChipDependentProperties {
         }
         return ret;
     }
-
 }

@@ -12,5 +12,4 @@ public class CC5XUserDefineModifier extends UserDefineModifier {
     public CC5XUserDefineModifier() {
         super(CC5XUserDefineProvider.OPT_ID, CC5XUserDefineProvider.OPT_PROP);
     }
-
 }

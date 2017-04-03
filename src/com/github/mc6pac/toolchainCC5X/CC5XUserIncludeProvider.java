@@ -14,6 +14,5 @@ public class CC5XUserIncludeProvider extends UserIncludeProvider {
 
     public CC5XUserIncludeProvider() {
         super(OPT_ID, OPT_PROP);
-    }
-    
+    }    
 }

@@ -6,8 +6,6 @@
 package com.github.mc6pac.toolchainCC5X;
 
 import com.microchip.crownking.opt.Version;
-import java.util.ArrayList;
-import java.util.List;
 
 public class CC5XVersion extends Version {
 

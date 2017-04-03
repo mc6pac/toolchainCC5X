@@ -7,10 +7,6 @@ package com.github.mc6pac.toolchainCC5X;
 
 import com.microchip.mplab.nbide.embedded.makeproject.spi.configurations.UserDefineProvider;
 
-/**
- *
- * @author Patrick
- */
 public class CC5XUserDefineProvider extends UserDefineProvider {
     
     public static final String OPT_ID = "CC5X";
@@ -18,6 +14,5 @@ public class CC5XUserDefineProvider extends UserDefineProvider {
 
     public CC5XUserDefineProvider() {
         super(OPT_ID, OPT_PROP);
-    }
-    
+    }    
 }

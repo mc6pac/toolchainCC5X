@@ -12,6 +12,5 @@ public class CC5XUserIncludeModifier extends UserIncludeModifier
     
     public CC5XUserIncludeModifier() {
         super(CC5XUserIncludeProvider.OPT_ID, CC5XUserIncludeProvider.OPT_PROP);
-    }
-    
+    }    
 }

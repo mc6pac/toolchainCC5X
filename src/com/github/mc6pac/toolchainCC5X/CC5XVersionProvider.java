@@ -22,6 +22,9 @@ public class CC5XVersionProvider implements VersionProvider {
 
         try
         {
+            // Call CC5X.exe with non-existing option "-S" to get an error, including version info.
+            // The compiler has no option to output only version info.
+            // If called without args, the compiler pauses after each screen full and waits for input to continue.
             Matcher m = LanguageToolSupport.findInOutput(pathToCompiler, new String [] {"-S"}, "CC5X.+(\\d\\.\\d[A-Z]?)", true, true);
             if (m == null) {
                 return "";
@@ -33,6 +36,5 @@ public class CC5XVersionProvider implements VersionProvider {
         }
 
         return "";
-    }
-    
+    }    
 }

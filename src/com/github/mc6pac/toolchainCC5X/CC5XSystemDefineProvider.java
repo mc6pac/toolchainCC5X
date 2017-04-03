@@ -7,7 +7,6 @@ package com.github.mc6pac.toolchainCC5X;
 
 import com.microchip.mplab.nbide.embedded.makeproject.api.configurations.MakeConfiguration;
 import com.microchip.mplab.nbide.embedded.spi.DefineProvider;
-import com.microchip.mplab.nbide.toolchainCommon.LTUtils;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

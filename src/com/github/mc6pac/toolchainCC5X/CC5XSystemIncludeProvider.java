@@ -25,6 +25,5 @@ public class CC5XSystemIncludeProvider implements IncludeProvider {
         ret.add(pathToBin);
         
         return ret;
-    }
-    
+    }    
 }
