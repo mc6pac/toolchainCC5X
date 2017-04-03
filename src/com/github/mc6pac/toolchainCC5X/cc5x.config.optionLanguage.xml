@@ -113,8 +113,10 @@ and open the template in the editor.
             <opt:booleanOption opt:id="modifysymbols" opt:name="Modify symbols." opt:trueemission="m"/>
             <opt:booleanOption opt:id="modifystrings" opt:name="Modify strings." opt:trueemission="s"/>
         </opt:complexOption>
-       
-        <opt:booleanOption opt:id="produceerrorfile" opt:name="Produce Error file." opt:trueemission="-F"/>
+
+        <opt:booleanOption opt:id="producelistfile" opt:name="Produce list file." opt:trueemission="-L"/>
+        <opt:booleanOption opt:id="producevariablefile" opt:name="Produce variables file." opt:trueemission="-V"/>
+        <opt:booleanOption opt:id="produceerrorfile" opt:name="Produce error file." opt:trueemission="-F"/>
     </opt:optionCategory>
 
     <opt:optionCategory opt:id="compilerwarnings" opt:name="Compiler warnings">
