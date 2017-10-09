@@ -185,7 +185,7 @@
     #elif defined(_12C672)
             #include <12C672.H>
     #elif defined(_12CE518)XXX            
-			#include <12CE518.H>
+            #include <12CE518.H>
     #elif defined(_12CE519)
             #include <12CE519.H>
     #elif defined(_12CE673)
@@ -494,6 +494,28 @@
             #include <16F1527.H>
     #elif defined(_16LF1527)
             #include <16F1527.H>
+    #elif defined(_16F15313)
+            #include <16F15313.H>
+    #elif defined(_16LF15313)
+            #include <16F15313.H>
+    #elif defined(_16LF15323)
+            #include <16F15323.H>
+    #elif defined(_16F15324)
+            #include <16F15324.H>
+    #elif defined(_16LF15324)
+            #include <16F15324.H>
+    #elif defined(_16F15325)
+            #include <16F15325.H>
+    #elif defined(_16LF15325)
+            #include <16F15325.H>
+    #elif defined(_16F15344)
+            #include <16F15344.H>
+    #elif defined(_16LF15344)
+            #include <16F15344.H>
+    #elif defined(_16F15345)
+            #include <16F15345.H>
+    #elif defined(_16LF15345)
+            #include <16F15345.H>
     #elif defined(_16F15354)
             #include <16F15354.H>
     #elif defined(_16LF15354)
@@ -502,6 +524,26 @@
             #include <16F15355.H>
     #elif defined(_16LF15355)
             #include <16F15355.H>
+    #elif defined(_16F15356)
+            #include <16F15356.H>
+    #elif defined(_16LF15356)
+            #include <16F15356.H>
+    #elif defined(_16F15375)
+            #include <16F15375.H>
+    #elif defined(_16LF15375)
+            #include <16F15375.H>
+    #elif defined(_16F15376)
+            #include <16F15376.H>
+    #elif defined(_16LF15376)
+            #include <16F15376.H>
+    #elif defined(_16F15385)
+            #include <16F15385.H>
+    #elif defined(_16LF15385)
+            #include <16F15385.H>
+    #elif defined(_16F15386)
+            #include <16F15386.H>
+    #elif defined(_16LF15386)
+            #include <16F15386.H>
     #elif defined(_16F1554)
             #include <16F1554.H>
     #elif defined(_16LF1554)
@@ -734,6 +776,10 @@
             #include <16F18855.h>
     #elif defined(_16LF18855)
             #include <16F18855.h>
+    #elif defined(_16F18856)
+            #include <16F18856.H>
+    #elif defined(_16LF18856)
+            #include <16F18856.H>
     #elif defined(_16F18857)
             #include <16F18857.h>
     #elif defined(_16LF18857)
@@ -742,6 +788,10 @@
             #include <16F18875.h>
     #elif defined(_16LF18875)
             #include <16F18875.h>
+    #elif defined(_16F18876)
+            #include <16F18876.H>
+    #elif defined(_16LF18876)
+            #include <16F18876.H>
     #elif defined(_16F18877)
             #include <16F18877.h>
     #elif defined(_16LF18877)
@@ -766,6 +816,42 @@
             #include <16F1907.H>
     #elif defined(_16LF1907)
             #include <16F1907.H>
+    #elif defined(_16F19155)
+            #include <16F19155.H>
+    #elif defined(_16LF19155)
+            #include <16F19155.H>
+    #elif defined(_16F19156)
+            #include <16F19156.H>
+    #elif defined(_16LF19156)
+            #include <16F19156.H>
+    #elif defined(_16F19175)
+            #include <16F19175.H>
+    #elif defined(_16LF19175)
+            #include <16F19175.H>
+    #elif defined(_16F19176)
+            #include <16F19176.H>
+    #elif defined(_16LF19176)
+            #include <16F19176.H>
+    #elif defined(_16F19185)
+            #include <16F19185.H>
+    #elif defined(_16LF19185)
+            #include <16F19185.H>
+    #elif defined(_16F19186)
+            #include <16F19186.H>
+    #elif defined(_16LF19186)
+            #include <16F19186.H>
+    #elif defined(_16F19195)
+            #include <16F19195.H>
+    #elif defined(_16LF19195)
+            #include <16F19195.H>
+    #elif defined(_16F19196)
+            #include <16F19196.H>
+    #elif defined(_16LF19196)
+            #include <16F19196.H>
+    #elif defined(_16F19197)
+            #include <16F19197.H>
+    #elif defined(_16LF19197)
+            #include <16F19197.H>
     #elif defined(_16F1933)
             #include <16F1933.H>
     #elif defined(_16LF1933)
@@ -984,7 +1070,7 @@
             #include <16HV753.H>
     #elif defined(_16HV785)
             #include <16HV785.H>
-	#else
-		#error Headder file for device not found
+    #else
+            #error Headder file for device not found
     #endif
 #endif

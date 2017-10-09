@@ -249,8 +249,19 @@ and open the template in the editor.
             <mp:device mp:name="PIC16F1519"/>
             <mp:device mp:name="PIC16F1526"/>
             <mp:device mp:name="PIC16F1527"/>
+            <mp:device mp:name="PIC16F15313" opt:fromversion="3.6"/>
+            <mp:device mp:name="PIC16F15323" opt:fromversion="3.6"/>
+            <mp:device mp:name="PIC16F15324" opt:fromversion="3.6"/>
+            <mp:device mp:name="PIC16F15325" opt:fromversion="3.6"/>
+            <mp:device mp:name="PIC16F15344" opt:fromversion="3.6"/>
+            <mp:device mp:name="PIC16F15345" opt:fromversion="3.6"/>
             <mp:device mp:name="PIC16F15354" opt:fromversion="3.5G"/>
             <mp:device mp:name="PIC16F15355" opt:fromversion="3.5G"/>
+            <mp:device mp:name="PIC16F15356" opt:fromversion="3.6"/>
+            <mp:device mp:name="PIC16F15375" opt:fromversion="3.6"/>
+            <mp:device mp:name="PIC16F15376" opt:fromversion="3.6"/>
+            <mp:device mp:name="PIC16F15385" opt:fromversion="3.6"/>
+            <mp:device mp:name="PIC16F15386" opt:fromversion="3.6"/>
             <mp:device mp:name="PIC16F1554"/>
             <mp:device mp:name="PIC16F1559"/>
             <mp:device mp:name="PIC16F1566" opt:fromversion="3.5G"/>
@@ -309,14 +320,25 @@ and open the template in the editor.
             <mp:device mp:name="PIC16F1847"/>
             <mp:device mp:name="PIC16F18854" opt:fromversion="3.5G"/>
             <mp:device mp:name="PIC16F18855" opt:fromversion="3.5G"/>
+            <mp:device mp:name="PIC16F18856" opt:fromversion="3.6"/>
             <mp:device mp:name="PIC16F18857" opt:fromversion="3.5G"/>
             <mp:device mp:name="PIC16F18875" opt:fromversion="3.5G"/>
+            <mp:device mp:name="PIC16F18876" opt:fromversion="3.6"/>
             <mp:device mp:name="PIC16F18877" opt:fromversion="3.5G"/>
             <mp:device mp:name="PIC16F1902"/>
             <mp:device mp:name="PIC16F1903"/>
             <mp:device mp:name="PIC16F1904"/>
             <mp:device mp:name="PIC16F1906"/>
             <mp:device mp:name="PIC16F1907"/>
+            <mp:device mp:name="PIC16F19155" opt:fromversion="3.6"/>
+            <mp:device mp:name="PIC16F19156" opt:fromversion="3.6"/>
+            <mp:device mp:name="PIC16F19175" opt:fromversion="3.6"/>
+            <mp:device mp:name="PIC16F19176" opt:fromversion="3.6"/>
+            <mp:device mp:name="PIC16F19185" opt:fromversion="3.6"/>
+            <mp:device mp:name="PIC16F19186" opt:fromversion="3.6"/>
+            <mp:device mp:name="PIC16F19195" opt:fromversion="3.6"/>
+            <mp:device mp:name="PIC16F19196" opt:fromversion="3.6"/>
+            <mp:device mp:name="PIC16F19197" opt:fromversion="3.6"/>
             <mp:device mp:name="PIC16F1933"/>
             <mp:device mp:name="PIC16F1934"/>
             <mp:device mp:name="PIC16F1936"/>
@@ -429,8 +451,19 @@ and open the template in the editor.
             <mp:device mp:name="PIC16LF1519"/>
             <mp:device mp:name="PIC16LF1526"/>
             <mp:device mp:name="PIC16LF1527"/>
+            <mp:device mp:name="PIC16LF15313" opt:fromversion="3.6"/>
+            <mp:device mp:name="PIC16LF15323" opt:fromversion="3.6"/>
+            <mp:device mp:name="PIC16LF15324" opt:fromversion="3.6"/>
+            <mp:device mp:name="PIC16LF15325" opt:fromversion="3.6"/>
+            <mp:device mp:name="PIC16LF15344" opt:fromversion="3.6"/>
+            <mp:device mp:name="PIC16LF15345" opt:fromversion="3.6"/>
             <mp:device mp:name="PIC16LF15354" opt:fromversion="3.5G"/>
             <mp:device mp:name="PIC16LF15355" opt:fromversion="3.5G"/>
+            <mp:device mp:name="PIC16LF15356" opt:fromversion="3.6"/>
+            <mp:device mp:name="PIC16LF15375" opt:fromversion="3.6"/>
+            <mp:device mp:name="PIC16LF15376" opt:fromversion="3.6"/>
+            <mp:device mp:name="PIC16LF15385" opt:fromversion="3.6"/>
+            <mp:device mp:name="PIC16LF15386" opt:fromversion="3.6"/>
             <mp:device mp:name="PIC16LF1554"/>
             <mp:device mp:name="PIC16LF1559"/>
             <mp:device mp:name="PIC16LF1566" opt:fromversion="3.5G"/>
@@ -489,14 +522,25 @@ and open the template in the editor.
             <mp:device mp:name="PIC16LF1847"/>
             <mp:device mp:name="PIC16LF18854" opt:fromversion="3.5G"/>
             <mp:device mp:name="PIC16LF18855" opt:fromversion="3.5G"/>
+            <mp:device mp:name="PIC16LF18856" opt:fromversion="3.6"/>
             <mp:device mp:name="PIC16LF18857" opt:fromversion="3.5G"/>
             <mp:device mp:name="PIC16LF18875" opt:fromversion="3.5G"/>
+            <mp:device mp:name="PIC16LF18876" opt:fromversion="3.6"/>
             <mp:device mp:name="PIC16LF18877" opt:fromversion="3.5G"/>
             <mp:device mp:name="PIC16LF1902"/>
             <mp:device mp:name="PIC16LF1903"/>
             <mp:device mp:name="PIC16LF1904"/>
             <mp:device mp:name="PIC16LF1906"/>
             <mp:device mp:name="PIC16LF1907"/>
+            <mp:device mp:name="PIC16LF19155" opt:fromversion="3.6"/>
+            <mp:device mp:name="PIC16LF19156" opt:fromversion="3.6"/>
+            <mp:device mp:name="PIC16LF19175" opt:fromversion="3.6"/>
+            <mp:device mp:name="PIC16LF19176" opt:fromversion="3.6"/>
+            <mp:device mp:name="PIC16LF19185" opt:fromversion="3.6"/>
+            <mp:device mp:name="PIC16LF19186" opt:fromversion="3.6"/>
+            <mp:device mp:name="PIC16LF19195" opt:fromversion="3.6"/>
+            <mp:device mp:name="PIC16LF19196" opt:fromversion="3.6"/>
+            <mp:device mp:name="PIC16LF19197" opt:fromversion="3.6"/>
             <mp:device mp:name="PIC16LF1933"/>
             <mp:device mp:name="PIC16LF1934"/>
             <mp:device mp:name="PIC16LF1936"/>
