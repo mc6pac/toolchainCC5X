@@ -764,6 +764,14 @@
             #include <16F18346.h>
     #elif defined(_16LF18346)
             #include <16F18346.h>
+    #elif defined(_16F18426)
+            #include <16F18426.h>
+    #elif defined(_16LF18426)
+            #include <16F18426.h>
+    #elif defined(_16F18446)
+            #include <16F18446.h>
+    #elif defined(_16LF18446)
+            #include <16F18446.h>
     #elif defined(_16F1847)
             #include <16F1847.H>
     #elif defined(_16LF1847)
